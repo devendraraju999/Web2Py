@@ -1,0 +1,32 @@
+Data is organised into 
+models
+ controllers
+ views
+ languages
+ modules
+ static files
+ plugins
+
+Two default controllers.
+appadmin.py provides database administrative interface.
+default.py :called by default when no controller is specified.
+
+[controller]/[function].[extension]
+eg : default/index.html
+
+response.view = default/something.html
+{{ response.toolbar()}} #to get more information
+#example response.function_name()
+response.index()
+
+request.vars.variable_name
+redirect(URL('web_page')) #used in default.py for navigation
+
+session.variable_name # to keep track of variable_name uses
+request.function # get called function information
+
+To CREATE A FORM WITHIN default.py specific function:
+
+form.process() : applies the validators and return form itselt using
+form.process().accepted:
+Validation isn't working with FORM but working with SQLFORM() IS_NOT_EMPTY()
