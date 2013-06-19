@@ -29,9 +29,11 @@ def first():
     return dict()
 #ad-hoc mechanism for authorization
 def second():
-    if not request.function =='third' and not session.visitor_name:
-        redirect(URL('third'))
-    return dict()
+        name = request.vars.visitor_name or redirect(URL('fifth'))
+        return dict(name=name)
+    #else:not request.function =='third' and not session.visitor_name:
+        #redirect(URL('third'))
+    #return dict()
 #Form is created using FORM property in default controller but IS_NOT_EMPTY() isn't working.
 def third():
     form = FORM(INPUT(_name='visitor_name',requiers=IS_NOT_EMPTY()),INPUT(_type='submit'))
@@ -46,3 +48,11 @@ def fourth():
         session.visitor_name = form.vars.visitor_name
         redirect(URL('second'))
     return dict(form=form)
+#Passing argument to callee function i.e second function
+def fifth():
+    form=SQLFORM.factory(Field('visitor_name',label='What is your name?',requires=IS_NOT_EMPTY()))
+    if form.process().accepted:
+        name = form.vars.visitor_name
+        redirect(URL('second',vars=dict(name=name)))
+    return dict(form=form)
+
