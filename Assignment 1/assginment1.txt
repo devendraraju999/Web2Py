@@ -1,0 +1,35 @@
+All,
+
+Here is a web2py assignment while you are going thru web2py book.
+
+Background
+=========
+
+Here is the example of DB Schema
+
+Table Parent :
+
+id, name
+1, Bob
+2, Alice
+3, Mary
+4, Peter
+
+Table Children :
+
+id,name, mother,father
+1, John, 2,1
+2, Jane, 3,4
+
+Assignment
+=========
+
+When the table Children is displayed using grid - It should be shown as following on the Screen
+name, mother, father
+John, Alice, Bob
+Jane, Mary, Peter
+
+(Please do not report that "table is displayed in the grid" as status report. This part is very easy, is not the assignment.)
+
+This (HTML) table should have an export functionality. The data should be exported as CSV file, but ....
+The exported CSV file should contain the data as shown on the screen i.e it should contain the names of mother and father, not the IDs from Parent table.

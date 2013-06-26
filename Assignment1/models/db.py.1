@@ -1,0 +1,21 @@
+#Creating database connection with sqlite database.
+#db_connect=DAL('mysql://root:root@localhost/test')
+db_connect=DAL('sqlite://storage.db')
+
+#Define schema for parent and child tables
+db_connect.define_table('Parent',Field('name',notnull=True,unique=True))
+db_connect.define_table('Child',Field('cname'),Field('mother','reference Parent',unique=True,notnull =True),
+    Field('father','reference Parent'))
+
+#db_connect.Parent._format='%(name)s/%(id)s'
+
+#Adding constraint
+db_connect.Parent.name.requires=IS_NOT_IN_DB(db_connect,db_connect.Parent.name)
+db_connect.Parent.name.requires=IS_NOT_EMPTY()
+db_connect.Child.cname.requires=IS_NOT_IN_DB(db_connect,db_connect.Child.cname)
+db_connect.Child.cname.requires=IS_NOT_EMPTY()
+
+
+#Inserting data
+db_connect.Parent.bulk_insert([{'name':'Bob'},{'name':'Alice'},{'name':'Mary'},{'name':'Peter'}])
+db_connect.Child.bulk_insert([{'cname':'John','mother':'2','father':'1'},{'cname':'Jane','mother':'3','father':'4'}])

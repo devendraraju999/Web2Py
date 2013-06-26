@@ -1,0 +1,77 @@
+timestamp: 2013-06-24T11:57:46.418282
+CREATE TABLE Parent(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name CHAR(512)
+);
+success!
+timestamp: 2013-06-24T11:57:46.579861
+CREATE TABLE Child(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name CHAR(512),
+    mother INTEGER REFERENCES Parent (id) ON DELETE CASCADE,
+    father INTEGER REFERENCES Parent (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2013-06-24T15:45:32.096571
+CREATE TABLE Parent(
+    id INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(255),
+    PRIMARY KEY(id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+success!
+timestamp: 2013-06-24T15:45:32.215524
+CREATE TABLE Child(
+    id INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(255),
+    mother INT, INDEX mother__idx (mother), FOREIGN KEY (mother) REFERENCES Parent (id) ON DELETE CASCADE,
+    father INT, INDEX father__idx (father), FOREIGN KEY (father) REFERENCES Parent (id) ON DELETE CASCADE,
+    PRIMARY KEY(id)
+) ENGINE=InnoDB CHARACTER SET utf8;
+success!
+timestamp: 2013-06-24T16:55:41.031537
+ALTER TABLE Parent ADD name__tmp VARCHAR(255) UNIQUE;
+success!
+UPDATE Parent SET name__tmp=name;
+success!
+ALTER TABLE Parent DROP COLUMN name;
+success!
+ALTER TABLE Parent ADD name VARCHAR(255) UNIQUE;
+success!
+UPDATE Parent SET name=name__tmp;
+success!
+ALTER TABLE Parent DROP COLUMN name__tmp;
+success!
+timestamp: 2013-06-24T16:55:41.847183
+ALTER TABLE Child ADD cname VARCHAR(255);
+success!
+timestamp: 2013-06-24T16:55:42.035639
+ALTER TABLE Child DROP COLUMN name;
+success!
+timestamp: 2013-06-24T17:23:38.971349
+ALTER TABLE Child ADD cname CHAR(512);
+timestamp: 2013-06-25T14:45:25.027493
+ALTER TABLE Parent ADD name__tmp VARCHAR(255) NOT NULL UNIQUE;
+success!
+UPDATE Parent SET name__tmp=name;
+success!
+ALTER TABLE Parent DROP COLUMN name;
+success!
+ALTER TABLE Parent ADD name VARCHAR(255) NOT NULL UNIQUE;
+success!
+UPDATE Parent SET name=name__tmp;
+success!
+ALTER TABLE Parent DROP COLUMN name__tmp;
+success!
+timestamp: 2013-06-25T14:45:25.830577
+ALTER TABLE Child ADD cname__tmp VARCHAR(120) NOT NULL;
+success!
+UPDATE Child SET cname__tmp=cname;
+success!
+ALTER TABLE Child DROP COLUMN cname;
+success!
+ALTER TABLE Child ADD cname VARCHAR(120) NOT NULL;
+success!
+UPDATE Child SET cname=cname__tmp;
+success!
+ALTER TABLE Child DROP COLUMN cname__tmp;
+success!

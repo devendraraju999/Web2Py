@@ -40,3 +40,6 @@ db.define_table('table_name',Field('attribute1',constraint),Field('attribute2',c
 upload is used by DAL to store names of uploaded files.
 format is used to determine how a record should be represented as a string.
 Defining table with in database
+
+obeject = db().select(db.image.ALL,orderby = db.image.title)
+Syntax for
